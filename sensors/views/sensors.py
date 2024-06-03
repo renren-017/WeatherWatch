@@ -8,13 +8,9 @@ class SensorViewSet(viewsets.ModelViewSet):
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['sensor_type__type', 'manufacturer__name', 'status']  # Basic filtering
+    filterset_fields = ['sensor_type__type', 'manufacturer__name', 'status']
 
     def get_queryset(self):
-        """
-        Optionally restricts the returned sensors to a given type,
-        by filtering against a `type` query parameter in the URL.
-        """
         queryset = super().get_queryset()
         sensor_type = self.request.query_params.get('type')
         if sensor_type is not None:
