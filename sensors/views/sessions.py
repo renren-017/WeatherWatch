@@ -1,5 +1,6 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from sensors.models import Session
@@ -7,6 +8,7 @@ from sensors.serializers import SessionSerializer, DataCreateSerializer
 
 
 class SessionViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Session.objects.all().prefetch_related('data')
     serializer_class = SessionSerializer
 

@@ -1,10 +1,13 @@
 from rest_framework import viewsets, permissions
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import IsAuthenticated
+
 from sensors.models import Sensor
 from sensors.serializers import SensorSerializer
 
 
 class SensorViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
     filter_backends = [DjangoFilterBackend]
