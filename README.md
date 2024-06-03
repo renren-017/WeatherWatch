@@ -3,6 +3,9 @@
 ## Short description of the project
 WeatherWatch is a platform designed to monitor and manage weather data collected from various sensors. The API facilitates real-time and historical data analysis, helping meteorologists and researchers to analyze weather patterns and trends effectively.
 
+## Google Drive with the recording
+[https://drive.google.com/drive/u/1/folders/12T0Hk7EIkG_AJNbR9eQe3py3lyAm9KIm](https://drive.google.com/drive/u/1/folders/12T0Hk7EIkG_AJNbR9eQe3py3lyAm9KIm)
+
 ## Features
 - **CRUD Operations**: Manage weather sensors including creation, reading, updating, and deleting sensor data.
 - **Authentication and Authorization**: Secured access through basic authentication and OAuth 2.0.
