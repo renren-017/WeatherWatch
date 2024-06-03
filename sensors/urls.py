@@ -1,6 +1,6 @@
 from django.urls import path
 
-from sensors.views import SensorViewSet, SessionViewSet, AlertViewSet
+from sensors.views import SensorViewSet, SessionViewSet, AlertViewSet, DataTypeViewSet, SensorTypeViewSet
 
 urlpatterns = [
     path('sensors/', SensorViewSet.as_view({"get": "list", "post": "create"}), name='sensors-list'),
@@ -12,4 +12,7 @@ urlpatterns = [
 
     path('alerts/', AlertViewSet.as_view({"get": "list", "post": "create"}), name='alerts-list'),
     path('alerts/<int:pk>/', AlertViewSet.as_view({"get": "retrieve", "delete": "destroy"}), name='alerts-detail'),
+
+    path('data_types/', DataTypeViewSet.as_view({"get": "list", "post": "create"}), name='data-types-list'),
+    path('sensor_types/', SensorTypeViewSet.as_view({"get": "list", "post": "create"}), name='sensor-types-list')
 ]
