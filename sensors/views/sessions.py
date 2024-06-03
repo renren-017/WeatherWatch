@@ -1,8 +1,10 @@
+from django.core.cache import cache
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from config import settings
 from sensors.models import Session
 from sensors.serializers import SessionSerializer, DataCreateSerializer
 
@@ -26,6 +28,15 @@ class SessionViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def list(self, request, *args, **kwargs):
+        cache_key = "sensors_" + "_".join(list(self.request.query_params.values()))
+        cached_data = cache.get(cache_key)
+        if cached_data:
+            return Response(data=cached_data, status=status.HTTP_200_OK)
+        result = super().list(request, *args, **kwargs)
+        cache.set(cache_key, result.data, settings.DEFAULT_CACHE_TIMEOUT)
+        return result
 
     def perform_create(self, serializer):
         serializer.save()
